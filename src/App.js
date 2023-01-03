@@ -1,7 +1,8 @@
+import { useState } from 'react'
 import UserCard from './components/UserCard'
 import { dataUsers } from './resources/dataSamples/dataUser'
 
-const App = () => {
+const ListUsers = () => {
   return (
     <div>
       {dataUsers().map((element, index) => (
@@ -12,10 +13,12 @@ const App = () => {
           userImage={element.picture.medium}
         />
       ))}
-      <button>NEXT</button>
     </div>
-
   )
+}
+
+const App = () => {
+  const [userCard, setUserCard] = useState([])
 }
 
 export default App
