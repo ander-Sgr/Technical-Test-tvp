@@ -1,18 +1,21 @@
 import { useState } from 'react'
 import UserCard from './components/UserCard'
-import { dataUsers } from './resources/dataSamples/dataUser'
+import { Request } from './helpers/api.helper'
+
+const baseURL = 'https://randomuser.me/api?results=5'
 
 const App = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [userCard, setUserCard] = useState([])
+  const getRequest = Request(baseURL)
 
   const handleNextButton = () => {
-    if (currentIndex >= dataUsers().length - 1) {
+    if (currentIndex >= getRequest.results.length - 1) {
       setCurrentIndex(0)
       setUserCard([])
     } else {
       setCurrentIndex(currentIndex + 1)
-      setUserCard([...userCard, dataUsers().map((element, index) => (
+      setUserCard([...userCard, getRequest.results.map((element, index) => (
         currentIndex === index
           ? <UserCard
               key={index}
@@ -22,10 +25,7 @@ const App = () => {
             />
           : null
       ))])
-
-      console.log(dataUsers()[currentIndex])
     }
-    console.log(currentIndex)
   }
 
   return (
